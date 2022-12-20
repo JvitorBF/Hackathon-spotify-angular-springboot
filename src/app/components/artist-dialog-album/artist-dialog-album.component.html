@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Adicionar Álbum</h1>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Posição</mat-label>
+    <input matInput [(ngModel)]="data.posicao" disabled />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>ID Álbum</mat-label>
+    <input matInput [(ngModel)]="data.album" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Adicionar</button>
+</div>

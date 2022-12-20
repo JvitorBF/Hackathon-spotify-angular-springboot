@@ -1,0 +1,120 @@
+import { MusicService } from './../../services/music.service';
+import { PlaylistService } from './../../services/playlist.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { PlaylistDialogComponent } from './../../components/playlist-dialog/playlist-dialog.component';
+import { PlaylistDialogMusicComponent } from 'src/app/components/playlist-dialog-music/playlist-dialog-music.component';
+import { Playlist } from 'src/app/models/playlist';
+import { Music } from 'src/app/models/music';
+
+@Component({
+  selector: 'app-playlist',
+  templateUrl: './playlist.component.html',
+  styleUrls: ['./playlist.component.css'],
+  providers: [PlaylistService, MusicService],
+})
+export class PlaylistComponent implements OnInit {
+  @ViewChild(MatTable)
+  table!: MatTable<any>;
+  displayedColumns: string[] = [
+    'posicao',
+    'nome',
+    'descricao',
+    'usuario',
+    'acoes',
+  ];
+  dataSource!: Playlist[];
+
+  constructor(
+    public dialog: MatDialog,
+    public playlistService: PlaylistService,
+    public musicService: MusicService
+  ) {
+    this.playlistService.getPlaylists().subscribe((data: Playlist[]) => {
+      this.dataSource = data;
+    });
+  }
+
+  ngOnInit(): void {}
+
+  openDialog(playlist: Playlist | null): void {
+    const dialogRef = this.dialog.open(PlaylistDialogComponent, {
+      width: '250px',
+      data:
+        playlist === null
+          ? {
+              posicao: null,
+              nome_playlist: '',
+              descricao: '',
+              usuario: null,
+              musica: [],
+            }
+          : {
+              id: playlist.id,
+              posicao: playlist.posicao,
+              nome_playlist: playlist.nome_playlist,
+              descricao: playlist.descricao,
+              usuario: playlist.usuario,
+            },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        if (this.dataSource.map((p) => p.id).includes(result.id)) {
+          this.playlistService
+            .putPlaylist(result.id, result)
+            .subscribe((data: Playlist) => {
+              const index = this.dataSource.findIndex(
+                (p) => p.id === result.id
+              );
+              this.dataSource[index] = data;
+              this.table.renderRows();
+            });
+        } else {
+          this.playlistService
+            .postPlaylist(result)
+            .subscribe((data: Playlist) => {
+              this.dataSource.push(data);
+              this.table.renderRows();
+            });
+        }
+      }
+    });
+  }
+
+  openDialogMusic(playlist: Playlist): void {
+    const dialogRef = this.dialog.open(PlaylistDialogMusicComponent, {
+      width: '250px',
+      data: {
+        id: playlist.id,
+        posicao: playlist.posicao,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        let playlist: Playlist | undefined;
+
+        playlist = this.dataSource.find((x) => x.id == result.id);
+
+        this.musicService.getMusic(result.musica).subscribe((data: Music) => {
+          playlist?.musica.push(data);
+          this.playlistService
+            .putPlaylistMusic(result.id, playlist)
+            .subscribe();
+        });
+      }
+    });
+  }
+
+  editElement(playlist: Playlist): void {
+    this.openDialog(playlist);
+  }
+
+  deleteElement(id: number): void {
+    this.playlistService.deletePlaylist(id).subscribe(() => {
+      this.dataSource = this.dataSource.filter((p) => p.id !== id);
+    });
+  }
+}

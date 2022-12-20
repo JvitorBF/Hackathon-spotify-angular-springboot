@@ -1,0 +1,33 @@
+Artista:
+	id:
+	nome_artista:
+	artista
+	Albúm é adicionado no artista pelo ID_album
+  http://localhost:8082/artista/?artistaId=1&albumId=1
+
+Album:
+	id:
+	nome_album:
+	data:
+
+Música:
+	id:
+	nome_musica:
+	duração:
+	álbum: {{album.id}} Quando a música é criado, ela já é adicionada em um álbum
+
+Playlist:
+	id:
+	nome_playlist:
+	descrição:
+	usuário: {{user.id}} Quando a plalyist é criada, ela já é adicionada em um usuario
+	Playlist tem um array de músicas, que é adicionado pelo Id_musica
+-----
+Usuário:
+	id:
+	nome_usuario:
+	email:
+	aniversario:
+	pais:
+
+

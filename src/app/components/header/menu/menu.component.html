@@ -1,0 +1,23 @@
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <a
+      routerLinkActive="link-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLink="/"
+      >Usuário</a
+    >
+  </button>
+  <button mat-menu-item>
+    <a routerLinkActive="link-active" routerLink="/artista">Artista</a>
+  </button>
+  <button mat-menu-item>
+    <a routerLinkActive="link-active" routerLink="/album">Álbum</a>
+  </button>
+  <button mat-menu-item>
+    <a routerLinkActive="link-active" routerLink="/musica">Música</a>
+  </button>
+  <button mat-menu-item>
+    <a routerLinkActive="link-active" routerLink="/playlist">Playlist</a>
+  </button>
+</mat-menu>

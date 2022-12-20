@@ -1,0 +1,13 @@
+.mat-menu-item {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 500;
+  color: black;
+}
+
+.link-active {
+ color: rgb(63,81,181);
+}

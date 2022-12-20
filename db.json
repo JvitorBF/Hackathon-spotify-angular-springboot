@@ -1,0 +1,84 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "posicao": 1,
+      "nome_usuario": "Joao Vitor Floriano Barbosa",
+      "email": "jvitorbf35@gmail.com",
+      "aniversario": "23/01/2003",
+      "pais": "Brasil"
+    },
+    {
+      "id": 2,
+      "posicao": 2,
+      "nome_usuario": "Carmen Nidia Floriano Barbosa",
+      "email": "carmenjv2016@gmail.com",
+      "aniversario": "08/08/1969",
+      "pais": "UK"
+    }
+  ],
+  "artist": [
+    {
+      "posicao": "1",
+      "nome_artista": "João Vitor Floriano Barbosa",
+      "album": [
+        {
+          "posicao": "1",
+          "nome_album": "otherside",
+          "data": "1967",
+          "id": 1
+        }
+      ],
+      "id": 1
+    }
+  ],
+  "album": [
+    {
+      "posicao": "1",
+      "nome_album": "otherside",
+      "data": "1967",
+      "id": 1
+    }
+  ],
+  "music": [
+    {
+      "id": 1,
+      "posicao": "1",
+      "nome_musica": "otherside ou nao",
+      "duracao": "3:25",
+      "album": "1"
+    },
+    {
+      "posicao": "2",
+      "nome_musica": "hello",
+      "duracao": "1:45",
+      "album": "1",
+      "id": 2
+    }
+  ],
+  "playlist": [
+    {
+      "posicao": "1",
+      "nome_playlist": "teste",
+      "descricao": "teste",
+      "usuario": "1",
+      "musica": [
+        {
+          "id": 1,
+          "posicao": "1",
+          "nome_musica": "otherside",
+          "duracao": "3:25",
+          "album": "1"
+        },
+        {
+          "posicao": "2",
+          "nome_musica": "hello",
+          "duracao": "1:45",
+          "album": "1",
+          "id": 2
+        }
+      ],
+      "id": 1
+    }
+  ]
+}
