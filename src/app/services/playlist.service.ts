@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Music } from '../models/music';
+
 import { Playlist } from '../models/playlist';
 
 @Injectable({
@@ -24,7 +24,10 @@ export class PlaylistService {
   }
 
   putPlaylistMusic(idPlaylist: number, playlist: Playlist | undefined) {
-    return this.http.put<Playlist>(`${this.playlistURL}/${idPlaylist}`, playlist );
+    return this.http.put<Playlist>(
+      `${this.playlistURL}/${idPlaylist}`,
+      playlist
+    );
   }
 
   deletePlaylist(id: number): Observable<Playlist> {

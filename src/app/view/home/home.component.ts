@@ -1,9 +1,10 @@
-import { UserService } from './../../services/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { UserDialogComponent } from '../../components/user-dialog/user-dialog.component';
 import { User } from 'src/app/models/user';
+
+import { UserDialogComponent } from '../../components/user-dialog/user-dialog.component';
+import { UserService } from './../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatTable)
   table!: MatTable<any>;
   displayedColumns: string[] = [
-    'posicao',
+    'id',
     'nome',
     'email',
     'aniversario',
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
       data:
         user === null
           ? {
-              posicao: null,
+              id: null,
               nome_usuario: '',
               email: '',
               aniversario: '',
@@ -46,7 +47,6 @@ export class HomeComponent implements OnInit {
             }
           : {
               id: user.id,
-              posicao: user.posicao,
               nome_usuario: user.nome_usuario,
               email: user.email,
               aniversario: user.aniversario,

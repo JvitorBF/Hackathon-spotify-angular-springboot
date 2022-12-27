@@ -2,9 +2,9 @@
   <button mat-button color="primary" (click)="openDialog(null)">Adicionar Álbum</button>
 
   <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="posicao">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let album">{{ album.posicao }}</td>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let album">{{ album.id }}</td>
     </ng-container>
 
     <ng-container matColumnDef="nome">

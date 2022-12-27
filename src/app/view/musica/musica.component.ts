@@ -1,9 +1,10 @@
-import { MatTable } from '@angular/material/table';
-import { MusicService } from './../../services/music.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Music } from 'src/app/models/music';
-import { MusicDialogComponent } from 'src/app/components/music-dialog/music-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { MusicDialogComponent } from 'src/app/components/music-dialog/music-dialog.component';
+import { Music } from 'src/app/models/music';
+
+import { MusicService } from './../../services/music.service';
 
 @Component({
   selector: 'app-musica',
@@ -14,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class MusicaComponent implements OnInit {
   @ViewChild(MatTable)
   table!: MatTable<any>;
-  displayedColumns: string[] = ['posicao', 'nome', 'duracao', 'album', 'acoes'];
+  displayedColumns: string[] = ['id', 'nome', 'duracao', 'album', 'acoes'];
   dataSource!: Music[];
   constructor(public dialog: MatDialog, public musicService: MusicService) {
     this.musicService.getMusics().subscribe((data: Music[]) => {
@@ -30,14 +31,13 @@ export class MusicaComponent implements OnInit {
       data:
         music === null
           ? {
-              posicao: null,
+              id: null,
               nome_musica: '',
               duracao: '',
               album: null,
             }
           : {
               id: music.id,
-              posicao: music.posicao,
               nome_musica: music.nome_musica,
               duracao: music.duracao,
               album: music.album,

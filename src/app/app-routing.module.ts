@@ -1,10 +1,11 @@
-import { PlaylistComponent } from './view/playlist/playlist.component';
-import { MusicaComponent } from './view/musica/musica.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 import { AlbumComponent } from './view/album/album.component';
 import { ArtistaComponent } from './view/artista/artista.component';
-import { NgModule, Component } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './view/home/home.component';
+import { MusicaComponent } from './view/musica/musica.component';
+import { PlaylistComponent } from './view/playlist/playlist.component';
 
 const routes: Routes = [
   {

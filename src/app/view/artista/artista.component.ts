@@ -1,12 +1,13 @@
-import { AlbumService } from './../../services/album.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ArtistService } from './../../services/artist.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { Artist } from 'src/app/models/artist';
-import { ArtistDialogComponent } from 'src/app/components/artist-dialog/artist-dialog.component';
 import { ArtistDialogAlbumComponent } from 'src/app/components/artist-dialog-album/artist-dialog-album.component';
+import { ArtistDialogComponent } from 'src/app/components/artist-dialog/artist-dialog.component';
 import { Album } from 'src/app/models/album';
+import { Artist } from 'src/app/models/artist';
+
+import { AlbumService } from './../../services/album.service';
+import { ArtistService } from './../../services/artist.service';
 
 @Component({
   selector: 'app-artista',
@@ -17,7 +18,7 @@ import { Album } from 'src/app/models/album';
 export class ArtistaComponent implements OnInit {
   @ViewChild(MatTable)
   table!: MatTable<any>;
-  displayedColumns: string[] = ['posicao', 'nome', 'acoes'];
+  displayedColumns: string[] = ['id', 'nome', 'acoes'];
   dataSource!: Artist[];
 
   constructor(
@@ -38,13 +39,12 @@ export class ArtistaComponent implements OnInit {
       data:
         artist === null
           ? {
-              posicao: null,
+              id: null,
               nome_artista: '',
               album: [],
             }
           : {
               id: artist.id,
-              posicao: artist.posicao,
               nome_artista: artist.nome_artista,
             },
     });
@@ -74,7 +74,6 @@ export class ArtistaComponent implements OnInit {
       width: '250px',
       data: {
         id: artist.id,
-        posicao: artist.posicao,
       },
     });
 

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Album } from 'src/app/models/album';
 
 @Component({
@@ -18,7 +18,7 @@ export class AlbumDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.data.posicao != null) {
+    if (this.data.id != null) {
       this.isChange = true;
     } else {
       this.isChange = false;

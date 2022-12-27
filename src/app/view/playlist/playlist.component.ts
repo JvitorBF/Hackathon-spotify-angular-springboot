@@ -1,12 +1,13 @@
-import { MusicService } from './../../services/music.service';
-import { PlaylistService } from './../../services/playlist.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { PlaylistDialogComponent } from './../../components/playlist-dialog/playlist-dialog.component';
 import { PlaylistDialogMusicComponent } from 'src/app/components/playlist-dialog-music/playlist-dialog-music.component';
-import { Playlist } from 'src/app/models/playlist';
 import { Music } from 'src/app/models/music';
+import { Playlist } from 'src/app/models/playlist';
+
+import { PlaylistDialogComponent } from './../../components/playlist-dialog/playlist-dialog.component';
+import { MusicService } from './../../services/music.service';
+import { PlaylistService } from './../../services/playlist.service';
 
 @Component({
   selector: 'app-playlist',
@@ -17,13 +18,7 @@ import { Music } from 'src/app/models/music';
 export class PlaylistComponent implements OnInit {
   @ViewChild(MatTable)
   table!: MatTable<any>;
-  displayedColumns: string[] = [
-    'posicao',
-    'nome',
-    'descricao',
-    'usuario',
-    'acoes',
-  ];
+  displayedColumns: string[] = ['id', 'nome', 'descricao', 'usuario', 'acoes'];
   dataSource!: Playlist[];
 
   constructor(
@@ -44,7 +39,7 @@ export class PlaylistComponent implements OnInit {
       data:
         playlist === null
           ? {
-              posicao: null,
+              id: null,
               nome_playlist: '',
               descricao: '',
               usuario: null,
@@ -52,7 +47,6 @@ export class PlaylistComponent implements OnInit {
             }
           : {
               id: playlist.id,
-              posicao: playlist.posicao,
               nome_playlist: playlist.nome_playlist,
               descricao: playlist.descricao,
               usuario: playlist.usuario,
@@ -88,7 +82,6 @@ export class PlaylistComponent implements OnInit {
       width: '250px',
       data: {
         id: playlist.id,
-        posicao: playlist.posicao,
       },
     });
 

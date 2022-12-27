@@ -1,9 +1,10 @@
-import { AlbumService } from './../../services/album.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { Album } from 'src/app/models/album';
 import { AlbumDialogComponent } from 'src/app/components/album-dialog/album-dialog.component';
+import { Album } from 'src/app/models/album';
+
+import { AlbumService } from './../../services/album.service';
 
 @Component({
   selector: 'app-album',
@@ -13,7 +14,7 @@ import { AlbumDialogComponent } from 'src/app/components/album-dialog/album-dial
 export class AlbumComponent implements OnInit {
   @ViewChild(MatTable)
   table!: MatTable<any>;
-  displayedColumns: string[] = ['posicao', 'nome', 'data', 'acoes'];
+  displayedColumns: string[] = ['id', 'nome', 'data', 'acoes'];
   dataSource!: Album[];
 
   constructor(public dialog: MatDialog, public albumService: AlbumService) {
@@ -30,13 +31,12 @@ export class AlbumComponent implements OnInit {
       data:
         album === null
           ? {
-              posicao: null,
+              id: null,
               nome_album: '',
               data: '',
             }
           : {
               id: album.id,
-              posicao: album.posicao,
               nome_album: album.nome_album,
               data: album.data,
             },

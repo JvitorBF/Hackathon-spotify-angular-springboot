@@ -18,7 +18,7 @@ export class ArtistDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.data.posicao != null) {
+    if (this.data.id != null) {
       this.isChange = true;
     } else {
       this.isChange = false;

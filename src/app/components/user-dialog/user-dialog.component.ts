@@ -14,11 +14,11 @@ export class UserDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: User,
-    public dialogRef: MatDialogRef<UserDialogComponent>,
+    public dialogRef: MatDialogRef<UserDialogComponent>
   ) {}
 
   ngOnInit(): void {
-    if (this.data.posicao != null) {
+    if (this.data.id != null) {
       this.isChange = true;
     } else {
       this.isChange = false;
