@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { first, Observable, tap } from 'rxjs';
 
 import { Album } from '../models/album';
 
@@ -8,11 +8,11 @@ import { Album } from '../models/album';
   providedIn: 'root',
 })
 export class AlbumService {
-  albumURL = 'http://localhost:3000/album';
+  albumURL = 'api/album';
   constructor(private http: HttpClient) {}
 
   getAlbums(): Observable<Album[]> {
-    return this.http.get<Album[]>(this.albumURL);
+    return this.http.get<Album[]>(this.albumURL).pipe(first());
   }
 
   getAlbum(id: number): Observable<Album> {
@@ -20,14 +20,14 @@ export class AlbumService {
   }
 
   postAlbum(album: Album): Observable<Album> {
-    return this.http.post<Album>(this.albumURL, album);
+    return this.http.post<Album>(this.albumURL, album).pipe(first());
   }
 
   putAlbum(id: number, album: Album): Observable<Album> {
-    return this.http.put<Album>(`${this.albumURL}/${id}`, album);
+    return this.http.put<Album>(`${this.albumURL}/${id}`, album).pipe(first());
   }
 
   deleteAlbum(id: number): Observable<Album> {
-    return this.http.delete<Album>(`${this.albumURL}/${id}`);
+    return this.http.delete<Album>(`${this.albumURL}/${id}`).pipe(first());
   }
 }
