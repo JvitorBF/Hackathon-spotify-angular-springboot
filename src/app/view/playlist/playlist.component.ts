@@ -39,7 +39,6 @@ export class PlaylistComponent implements OnInit {
       data:
         playlist === null
           ? {
-              id: null,
               nome_playlist: '',
               descricao: '',
               usuario: null,
@@ -87,15 +86,9 @@ export class PlaylistComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
-        let playlist: Playlist | undefined;
-
-        playlist = this.dataSource.find((x) => x.id == result.id);
-
+        console.log(result);
         this.musicService.getMusic(result.musica).subscribe((data: Music) => {
-          playlist?.musica.push(data);
-          this.playlistService
-            .putPlaylistMusic(result.id, playlist)
-            .subscribe();
+          this.playlistService.putPlaylistMusic(result.id, data.id).subscribe();
         });
       }
     });
