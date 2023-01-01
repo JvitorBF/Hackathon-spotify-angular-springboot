@@ -31,7 +31,6 @@ export class AlbumComponent implements OnInit {
       data:
         album === null
           ? {
-              id: null,
               nome_album: '',
               data: '',
             }

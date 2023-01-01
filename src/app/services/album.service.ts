@@ -8,11 +8,16 @@ import { Album } from '../models/album';
   providedIn: 'root',
 })
 export class AlbumService {
-  albumURL = 'api/album';
+  private readonly albumURL = 'api/album';
   constructor(private http: HttpClient) {}
 
   getAlbums(): Observable<Album[]> {
-    return this.http.get<Album[]>(this.albumURL).pipe(first());
+    return this.http.get<Album[]>(this.albumURL).pipe(
+      first(),
+      tap((res: Album[]) => {
+        console.log(res);
+      })
+    );
   }
 
   getAlbum(id: number): Observable<Album> {
