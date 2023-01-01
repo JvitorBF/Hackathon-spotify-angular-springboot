@@ -39,7 +39,6 @@ export class ArtistaComponent implements OnInit {
       data:
         artist === null
           ? {
-              id: null,
               nome_artista: '',
               album: [],
             }
@@ -79,13 +78,9 @@ export class ArtistaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
-        let artist: Artist | undefined;
-
-        artist = this.dataSource.find((x) => x.id == result.id);
-
         this.albumService.getAlbum(result.album).subscribe((data: Album) => {
-          artist?.album.push(data);
-          this.artistService.putArtistAlbum(result.id, artist).subscribe();
+          console.log(data);
+          this.artistService.putArtistAlbum(result.id, data.id).subscribe();
         });
       }
     });

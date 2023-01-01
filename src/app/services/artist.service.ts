@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { first, Observable, tap } from 'rxjs';
 
 import { Artist } from '../models/artist';
 
@@ -8,31 +8,37 @@ import { Artist } from '../models/artist';
   providedIn: 'root',
 })
 export class ArtistService {
-  artistURL = 'http://localhost:3000/artist';
+  private readonly artistURL = 'api/artista';
 
   constructor(private http: HttpClient) {}
 
   getArtists(): Observable<Artist[]> {
-    return this.http.get<Artist[]>(this.artistURL);
+    return this.http.get<Artist[]>(this.artistURL).pipe(
+      first(),
+      tap((res: Artist[]) => console.log(res))
+    );
   }
 
   postArtist(artist: Artist): Observable<Artist> {
-    return this.http.post<Artist>(this.artistURL, artist);
+    return this.http.post<Artist>(this.artistURL, artist).pipe(first());
   }
 
   putArtist(id: number, artist: Artist): Observable<Artist> {
-    return this.http.put<Artist>(`${this.artistURL}/${id}`, artist);
+    return this.http
+      .put<Artist>(`${this.artistURL}/${id}`, artist)
+      .pipe(first());
   }
 
-  putArtistAlbum(idArtist: number, artist: Artist | undefined) {
-    return this.http.put<Artist>(`${this.artistURL}/${idArtist}`, artist);
+  putArtistAlbum(idArtist: number, idAlbum: number) {
+    return this.http
+      .put<Artist>(
+        `${this.artistURL}/?artistaId=${idArtist}&albumId=${idAlbum}`,
+        null
+      )
+      .pipe(first());
   }
 
   deleteArtist(id: number): Observable<Artist> {
-    return this.http.delete<Artist>(`${this.artistURL}/${id}`);
+    return this.http.delete<Artist>(`${this.artistURL}/${id}`).pipe(first());
   }
 }
-
-/*
-    public data: Artist,
- */
