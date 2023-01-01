@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
       data:
         user === null
           ? {
-              id: null,
               nome_usuario: '',
               email: '',
               aniversario: '',
