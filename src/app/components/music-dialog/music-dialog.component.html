@@ -2,24 +2,29 @@
 <h1 *ngIf="isChange" mat-dialog-title>Editar Música</h1>
 <div mat-dialog-content>
   <mat-form-field>
-    <mat-label>ID</mat-label>
-    <input matInput [(ngModel)]="data.id">
-  </mat-form-field>
-  <mat-form-field>
     <mat-label>Nome</mat-label>
-    <input matInput [(ngModel)]="data.nome_musica">
+    <input matInput [(ngModel)]="data.nome_musica" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Duração</mat-label>
-    <input matInput [(ngModel)]="data.duracao">
+    <input matInput [(ngModel)]="data.duracao" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Álbum</mat-label>
-    <input matInput [(ngModel)]="data.album">
+    <input matInput [(ngModel)]="data.album" />
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button *ngIf="!isChange"  [mat-dialog-close]="data" cdkFocusInitial>Criar</button>
-  <button mat-button *ngIf="isChange"  [mat-dialog-close]="data" cdkFocusInitial>Editar</button>
+  <button
+    mat-button
+    *ngIf="!isChange"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+  >
+    Criar
+  </button>
+  <button mat-button *ngIf="isChange" [mat-dialog-close]="data" cdkFocusInitial>
+    Editar
+  </button>
 </div>

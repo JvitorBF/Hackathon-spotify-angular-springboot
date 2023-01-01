@@ -31,7 +31,6 @@ export class MusicaComponent implements OnInit {
       data:
         music === null
           ? {
-              id: null,
               nome_musica: '',
               duracao: '',
               album: null,
@@ -63,12 +62,14 @@ export class MusicaComponent implements OnInit {
       }
     });
   }
+
   editElement(music: Music): void {
     this.openDialog(music);
   }
-  deleteElement(id: number): void {
-    this.musicService.deleteMusic(id).subscribe(() => {
-      this.dataSource = this.dataSource.filter((m) => m.id !== id);
+
+  deleteElement(music: Music): void {
+    this.musicService.deleteMusic(music.id).subscribe(() => {
+      this.dataSource = this.dataSource.filter((m) => m.id !== music.id);
     });
   }
 }
